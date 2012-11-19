@@ -1,6 +1,14 @@
 #!/usr/bin/python
 import math
 
+'''
+Code for reading data from a DS18B20 digital temp sensor via 1-wire from a Raspberry Pi. 
+Includes a simple Kalman filter to smooth out the data.
+
+See:
+* http://www.picymru.com/633
+* http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf
+'''
 
 class KalmanFilter():
     '''
@@ -53,7 +61,8 @@ class Sensor():
         c = c / 1000 
 
         if (c < self.MIN_VAL or c > self.MAX_VAL) or (math.fabs(self.lastVal - c) > self.ALLOWED_VARIANCE):
-            print "bad data: %f" % c
+            #print "bad data: %f" % c
+            pass
         else:
             self.val = c
             self.lastVal = self.val
